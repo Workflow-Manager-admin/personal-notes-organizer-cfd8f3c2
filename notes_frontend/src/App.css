@@ -33,12 +33,26 @@
 body,
 #root,
 .App {
-  background: var(--bg-primary);
+  /* Modern subtle vertical gradient with main palette */
+  background:
+    linear-gradient(
+      135deg, 
+      #f5fafd 0%, 
+      #e3edf9 16%, 
+      #e6effc 48%, 
+      #fbeab1 67%, 
+      #ffe27a 80%, 
+      #fff7df 94%
+    ),
+    var(--bg-primary); /* fallback/backwards compatible */
+  /* Overlay a semi-transparent blue diagonal as the subtle accent, gently fading in */
+  /* The white/yellow combination keeps it light & minimal */
   color: var(--text-primary);
   min-height: 100vh;
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Helvetica Neue', sans-serif;
   transition: background 0.3s, color 0.2s;
+  background-attachment: fixed;
 }
 
 .header {
