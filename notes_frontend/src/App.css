@@ -1,13 +1,247 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  /* Colors (overwrite brand with project palette) */
+  --bg-primary: #fff;
+  --bg-secondary: #f5f7fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #424242;
+  --accent: #FFC107;
+  --primary: #1976D2;
+  --secondary: #424242;
+  --border-color: #e0e0e0;
+
+  --button-bg: var(--primary);
+  --button-text: #fff;
+  --fab-bg: var(--accent);
+  --fab-text: #fff;
+  --fab-shadow: 0 3px 12px rgba(25, 118, 210, 0.10);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #23272f;
+  --bg-secondary: #282c34;
+  --text-primary: #fff;
+  --text-secondary: #bdbdbd;
+  --border-color: #404040;
+  --button-bg: #0056b3;
+  --button-text: #fff;
+  --fab-bg: #FFC107;
+  --fab-text: #1a1a1a;
+  --fab-shadow: 0 3px 12px rgba(33,33,33,0.20);
+}
+
+body,
+#root,
+.App {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, 'Helvetica Neue', sans-serif;
+  transition: background 0.3s, color 0.2s;
+}
+
+.header {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  box-sizing: border-box;
+  background: var(--bg-secondary);
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: -1px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2.5rem auto 0;
+  gap: 2.5rem;
+  min-height: 65vh;
+}
+
+.notes-list-panel {
+  min-width: 320px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.02);
+  height: 60vh;
+  overflow-y: auto;
+  transition: border 0.15s;
+}
+
+.notes-list-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--secondary);
+  margin: 0.7rem 1.2rem 0.5rem 1.2rem;
+}
+
+.notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note-list-item {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.2s;
+  border-radius: 6px;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-list-item.selected,
+.note-list-item:hover {
+  background: rgba(25, 118, 210, 0.08);
+}
+
+.note-title {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.note-date {
+  color: var(--secondary);
+  font-size: 0.90em;
+  margin-left: 1.2em;
+}
+
+.note-editor-panel {
+  flex: 1;
+  min-width: 340px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem 2.2rem 1.5rem 2.2rem;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.02);
+  min-height: 55vh;
+  margin-right: 0.5rem;
+  transition: border 0.15s;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    flex-direction: column;
+    gap: 1.3rem;
+    align-items: stretch;
+    margin-top: 1.2rem;
+  }
+  .notes-list-panel, .note-editor-panel {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+}
+
+.fab {
+  position: fixed;
+  right: 2.2rem;
+  bottom: 2.75rem;
+  background: var(--fab-bg);
+  color: var(--fab-text);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2.4rem;
+  box-shadow: var(--fab-shadow);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 40;
+  transition: background 0.2s, box-shadow 0.18s, color 0.18s;
+}
+.fab:focus-visible,
+.fab:hover {
+  background: #fff8e1;
+  color: var(--accent);
+  outline: none;
+  box-shadow: 0 8px 28px rgba(25, 118, 210, 0.12);
+}
+.fab:active {
+  background: var(--accent);
+  color: var(--primary);
+  transform: scale(0.97);
+}
+
+.button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 0.5rem 1.3rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.15s;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+  margin: 0 0.8em 0.8em 0;
+}
+
+.button:focus-visible,
+.button:hover {
+  background: var(--accent);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.button.delete {
+  background: #eee;
+  color: #c00;
+  border: 1.2px solid #ffc10744;
+}
+
+.button.delete:focus-visible,
+.button.delete:hover {
+  background: #ffe6e3;
+  color: #b71c1c;
+}
+
+.text-input,
+.textarea-input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 0.6em 0.85em;
+  font-size: 1.12rem;
+  margin-bottom: 1.15em;
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: none;
+  transition: border 0.18s;
+}
+
+.textarea-input {
+  min-height: 120px;
+  max-height: 290px;
+  line-height: 1.6;
+  font-size: 1.13rem;
+}
+
+.text-input:focus-visible,
+.textarea-input:focus-visible {
+  border: 1.5px solid var(--primary);
+  outline: none;
+  background: #f1f7fb;
 }
 
 [data-theme="dark"] {
